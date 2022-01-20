@@ -8,6 +8,8 @@
 4. When the bomb count goes to 8 or less, the count will not show in the DOM
 5. Whoever counts down to 0 or less first with the bomb, loses.
 
+
+NOTES: use a modal for when the count is 8 or less
 */
 
 /* SEQUENCE OF HOW THE GAME WEBSITE IN THE BROWSER WILL WORK 
@@ -23,12 +25,12 @@
 // so that it'd be more difficult and would be more of a "mind game" with the other 
 // player. Once the bomb count reaches 0, display whether you or the computer won
 // and display a Restart Game button to allow the player to play again
-// Restart Game refreshes the count, win counter displayed
+// Restart Game refreshes the count, win counter displayed, after first round is over
+// the bomb counter will randomize from an integer of 15 to 20 instead of just 15
 */
 
 // GLOBAL VARIABLE OF ROUND COUNT
 let roundCount = 1;
-
 
 
 // DOM Elements here
@@ -112,7 +114,7 @@ const bomb = new Bomb;
 // FUNCTION THAT DETERMINES BOMB HEALTH AT START OF THE ROUND
 const bombCount = () => {
   if (roundCount > 1) {
-    bomb.count = Math.floor(Math.random()*7)+14
+    bomb.count = Math.floor(Math.random() * (21 - 15)) + 15// this makes 15-20
   }
 }
 
@@ -120,42 +122,44 @@ bombCount()
 console.log(bomb.count)
 
 // FUNCTION THAT DECREASES BOMB BY 1
-const playerTossOne = () => {
-  player.hasBomb = false;
-  cpu.hasBomb = true;
-  bomb.count -= 1;
-  if (bomb.count <= 0) {
+const playerToss = (count) => {
+  player.hasBomb = false; // player would not have the bomb after tossing
+  cpu.hasBomb = true; // cpu now has the bomb after receiving from player
+  bomb.count -= count; // counter on the bomb would decrease by 1
+  if (bomb.count <= 0) { // if bomb counter is already at 0 or less, end the game
     bomb.explode = true;
     endGame()
   } 
+  console.log(bomb.count)
 }
 
-// FUNCTION THAT DECREASES BOMB BY 2
-const playerTossTwo = () => {
-  player.hasBomb = false;
-  cpu.hasBomb = true;
-  bomb.count -= 2;
-    if (bomb.count <= 0) {
-      bomb.explode = true;
-      endGame()
-    }
-}
+// // FUNCTION THAT DECREASES BOMB BY 2
+// const playerTossTwo = () => {
+//   player.hasBomb = false;
+//   cpu.hasBomb = true;
+//   bomb.count -= 2;
+//     if (bomb.count <= 0) {
+//       bomb.explode = true;
+//       endGame()
+//     }
+// }
 
 // FUNCTION THAT CHECKS TO SEE IF BOMB EXPLODES
-const endGame = () => {
+const endGame = () => { // ends the game if either bomb explodes on player or on cpu
   if(bomb.explode) {
     if(player.hasBomb) {
-      cpu.victory += 1
+      cpu.victory += 1 // adds 1 to win counter
     } else if (cpu.hasBomb) {
       player.victory += 1
-      // manipulate the DOM
+      // manipulate the DOM of win counter, text box showing who won
     }
   }
 newRound()
 }
 
 // NEW ROUND FUNCTION
-const newRound = () => { // make the image of player hold the bomb, computer image not hold the bomb
+const newRound = () => { // make the image of player hold the bomb, computer image to
+  // not hold the bomb, resets the game
   roundCount++
   cpu.hasBomb = false;
   player.hasBomb = true;
@@ -163,7 +167,16 @@ const newRound = () => { // make the image of player hold the bomb, computer ima
   // re-enable button here
 }
 
-// make a function for computer to toss the bomb and randomly generate 1 or 2 and swap images of players holding the bomb
+// make a function for computer to toss the bomb and randomly generate 1 or 2 
+// and swap images of players holding the bomb
+const cpuToss = () => {
+  cpu.hasBomb = true;
+  player.hasBomb = false;
+  const cpuDecide = Math.floor(Math.random()*2+1);
+  bomb.count -= cpuDecide // check to see if game is won or lost
+  cpu.hasBomb = false;
+  player.hasBomb = true;
+}
 
 /* gameStart function
   
@@ -201,5 +214,17 @@ gameStart()
 
   restart button that refreshes the game
 */
+
+const decreaseOneBtn = document.getElementById("decrease-one")
+
+decreaseOneBtn.addEventListener('click', (evt) => {
+  playerToss(evt.target.value) //passing the value of the tag 
+})
+
+const decreaseTwoBtn = document.getElementById("decrease-two")
+
+decreaseTwoBtn.addEventListener('click', (evt) => {
+  playerToss(evt.target.value)
+})
 
 // audio track "Bombing Mission FFVII" running in the background
