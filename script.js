@@ -5,7 +5,7 @@
 1. Players take turns in tossing a bomb back and forth that starts on a count of 15
 2. You will always go first, while the CPU goes second
 3. Both players have the option of decreasing the counter by 1 or 2
-4. When the bomb count goes to 8 or less, the count will not show in the DOM
+4. When the bomb count is 3-8, have the bomb count randomly disappear or appear
 5. Whoever counts down to 0 or less first with the bomb, loses.
 
 
@@ -102,7 +102,7 @@ const cpu = new Computer();
 
 class Bomb {
   constructor () {
-    this.count = 15;
+    this.count = 15; // first round by default will be count of 15
     this.explode = false;
   }
 }
@@ -121,11 +121,29 @@ const bombCount = () => {
 bombCount()
 console.log(bomb.count)
 
-// FUNCTION THAT DECREASES BOMB BY 1
+// FUNCTION THAT DECREASES BOMB BY 1 OR 2
 const playerToss = (count) => {
   player.hasBomb = false; // player would not have the bomb after tossing
   cpu.hasBomb = true; // cpu now has the bomb after receiving from player
   bomb.count -= count; // counter on the bomb would decrease by 1
+  console.log(bomb.count)
+  if (bomb.count <= 0) { // if bomb counter is already at 0 or less, end the game
+    bomb.explode = true;
+    endGame()
+  } else {
+    cpuToss()
+  }
+  
+}
+
+// make a function for computer to toss the bomb and randomly generate 1 or 2 
+// and swap images of players holding the bomb
+
+const cpuToss = () => {
+  cpu.hasBomb = false;
+  player.hasBomb = true;
+  const cpuDecide = Math.floor(Math.random()*2+1); // variable for cpu to generate 1 or 2
+  bomb.count -= cpuDecide; // check to see if game is won or lost
   if (bomb.count <= 0) { // if bomb counter is already at 0 or less, end the game
     bomb.explode = true;
     endGame()
@@ -144,19 +162,6 @@ const playerToss = (count) => {
 //     }
 // }
 
-// FUNCTION THAT CHECKS TO SEE IF BOMB EXPLODES
-const endGame = () => { // ends the game if either bomb explodes on player or on cpu
-  if(bomb.explode) {
-    if(player.hasBomb) {
-      cpu.victory += 1 // adds 1 to win counter
-    } else if (cpu.hasBomb) {
-      player.victory += 1
-      // manipulate the DOM of win counter, text box showing who won
-    }
-  }
-newRound()
-}
-
 // NEW ROUND FUNCTION
 const newRound = () => { // make the image of player hold the bomb, computer image to
   // not hold the bomb, resets the game
@@ -167,16 +172,22 @@ const newRound = () => { // make the image of player hold the bomb, computer ima
   // re-enable button here
 }
 
-// make a function for computer to toss the bomb and randomly generate 1 or 2 
-// and swap images of players holding the bomb
-const cpuToss = () => {
-  cpu.hasBomb = true;
-  player.hasBomb = false;
-  const cpuDecide = Math.floor(Math.random()*2+1);
-  bomb.count -= cpuDecide // check to see if game is won or lost
-  cpu.hasBomb = false;
-  player.hasBomb = true;
+// FUNCTION THAT CHECKS TO SEE IF BOMB EXPLODES
+const endGame = () => { // ends the game if either bomb explodes on player or on cpu
+  if(bomb.explode) {
+    if(player.hasBomb) {
+      cpu.victory += 1 // adds 1 to win counter
+    } else if (cpu.hasBomb) {
+      player.victory += 1
+      // manipulate the DOM of win counter, text box showing who won
+    }
+  }
+  newRound()
 }
+
+
+
+
 
 /* gameStart function
   
@@ -213,6 +224,7 @@ gameStart()
   button to decrease count of bomb by 2
 
   restart button that refreshes the game
+
 */
 
 const decreaseOneBtn = document.getElementById("decrease-one")
