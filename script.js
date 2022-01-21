@@ -114,7 +114,8 @@ const bomb = new Bomb;
 // FUNCTION THAT DETERMINES BOMB HEALTH AT START OF THE ROUND
 const bombCount = () => {
   if (roundCount > 1) {
-    bomb.count = Math.floor(Math.random() * (21 - 15)) + 15// this makes 15-20
+    bomb.count = Math.floor(Math.random() * (21 - 15)) + 15
+    // this makes 15-20
   }
 }
 
@@ -123,10 +124,10 @@ console.log(bomb.count)
 
 // FUNCTION THAT DECREASES BOMB BY 1 OR 2
 const playerToss = (count) => {
-  player.hasBomb = false; // player would not have the bomb after tossing
-  cpu.hasBomb = true; // cpu now has the bomb after receiving from player
+  player.hasBomb = true; // player would have bomb to toss it
+  cpu.hasBomb = false; // 
   bomb.count -= count; // counter on the bomb would decrease by 1
-  console.log(bomb.count)
+  console.log(bomb.count, "Player move")
   if (bomb.count <= 0) { // if bomb counter is already at 0 or less, end the game
     bomb.explode = true;
     endGame()
@@ -140,15 +141,15 @@ const playerToss = (count) => {
 // and swap images of players holding the bomb
 
 const cpuToss = () => {
-  cpu.hasBomb = false;
-  player.hasBomb = true;
+  cpu.hasBomb = true;
+  player.hasBomb = false;
   const cpuDecide = Math.floor(Math.random()*2+1); // variable for cpu to generate 1 or 2
-  bomb.count -= cpuDecide; // check to see if game is won or lost
+  bomb.count -= cpuDecide; // cpu decrease by 1 or 2
   if (bomb.count <= 0) { // if bomb counter is already at 0 or less, end the game
     bomb.explode = true;
     endGame()
   } 
-  console.log(bomb.count)
+  console.log(bomb.count, "CPU move")
 }
 
 // // FUNCTION THAT DECREASES BOMB BY 2
@@ -177,8 +178,10 @@ const endGame = () => { // ends the game if either bomb explodes on player or on
   if(bomb.explode) {
     if(player.hasBomb) {
       cpu.victory += 1 // adds 1 to win counter
+      window.alert(`CPU won. CPU victories: ${cpu.victory}`)
     } else if (cpu.hasBomb) {
       player.victory += 1
+      window.alert(`You won! Your victories: ${player.victory}`)
       // manipulate the DOM of win counter, text box showing who won
     }
   }
@@ -237,6 +240,12 @@ const decreaseTwoBtn = document.getElementById("decrease-two")
 
 decreaseTwoBtn.addEventListener('click', (evt) => {
   playerToss(evt.target.value)
+})
+
+const restartBtn = document.getElementById("restart")
+
+restartBtn.addEventListener('click', (evt) => {
+  newRound();
 })
 
 // audio track "Bombing Mission FFVII" running in the background

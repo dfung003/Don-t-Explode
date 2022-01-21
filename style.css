@@ -1,0 +1,15 @@
+#title {
+    text-align: center;
+}
+
+#main {
+    display: flex;
+    height: 80%;
+    width: 100%;
+}
+
+.container {
+    border: 2px solid black;
+    width: 40%;
+    height: 80vh;
+}
