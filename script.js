@@ -29,6 +29,10 @@ NOTES: use a modal for when the count is 8 or less
 // the bomb counter will randomize from an integer of 15 to 20 instead of just 15
 */
 
+// https://fonts.google.com/specimen/Press+Start+2P#standard-styles
+// https://fonts.google.com/specimen/Bebas+Neue
+// POSSIBLE FONTS
+
 // GLOBAL VARIABLE OF ROUND COUNT
 let roundCount = 1;
 
@@ -121,6 +125,7 @@ const bombCount = () => {
 
 bombCount()
 console.log(bomb.count)
+// display bomb.count in big font on the indicator of the DOM
 
 // FUNCTION THAT DECREASES BOMB BY 1 OR 2
 const playerToss = (count) => {
@@ -128,9 +133,10 @@ const playerToss = (count) => {
   cpu.hasBomb = false; // 
   bomb.count -= count; // counter on the bomb would decrease by 1
   console.log(bomb.count, "Player move")
+  // Put in the DOM "Player has decreased the count by 1(2)"
   if (bomb.count <= 0) { // if bomb counter is already at 0 or less, end the game
     bomb.explode = true;
-    endGame()
+    endGame() 
   } else {
     cpuToss()
   }
@@ -145,9 +151,11 @@ const cpuToss = () => {
   player.hasBomb = false;
   const cpuDecide = Math.floor(Math.random()*2+1); // variable for cpu to generate 1 or 2
   bomb.count -= cpuDecide; // cpu decrease by 1 or 2
+  // Print in the DOM "CPU is deciding... (2 seconds)"
+  // Print in the DOM "CPU has decreased the count by 1(2)"
   if (bomb.count <= 0) { // if bomb counter is already at 0 or less, end the game
     bomb.explode = true;
-    endGame()
+    endGame() 
   } 
   console.log(bomb.count, "CPU move")
 }
@@ -167,9 +175,11 @@ const cpuToss = () => {
 const newRound = () => { // make the image of player hold the bomb, computer image to
   // not hold the bomb, resets the game
   roundCount++
+  // Print in the DOM `Round ${roundCount} start!`
   cpu.hasBomb = false;
   player.hasBomb = true;
   bombCount();
+  // display bomb.count in the DOM
   // re-enable button here
 }
 
@@ -179,13 +189,15 @@ const endGame = () => { // ends the game if either bomb explodes on player or on
     if(player.hasBomb) {
       cpu.victory += 1 // adds 1 to win counter
       window.alert(`CPU won. CPU victories: ${cpu.victory}`)
+      // Print in the DOM "Bomb has exploded in your hands. You lose."
+      // add 1 to CPU score on the DOM
     } else if (cpu.hasBomb) {
       player.victory += 1
       window.alert(`You won! Your victories: ${player.victory}`)
-      // manipulate the DOM of win counter, text box showing who won
+      // Print in the DOM "You win" and add 1 to player score on the DOM
     }
   }
-  newRound()
+  newRound() // make Play Again button clickable
 }
 
 
@@ -194,15 +206,8 @@ const endGame = () => { // ends the game if either bomb explodes on player or on
 
 /* gameStart function
   
-  if else statements that checks to see if bomb is at greater than 0 count
+  resets the bomb count, sets player to having the bomb, adds 1 or whoever won
 
-  first turn, player decreases by either 1 or 2
-
-  after that happens, computer chooses a random count of either decrease by 1 or 2
-
-  goes back to player if bomb countdown is still greater than 0
-
-  if statement to not display the bomb countdown when bomb countdown is at 8 or less
 */
 
 const gameStart = () => {
@@ -242,9 +247,9 @@ decreaseTwoBtn.addEventListener('click', (evt) => {
   playerToss(evt.target.value)
 })
 
-const restartBtn = document.getElementById("restart")
+const playAgainBtn = document.getElementById("play")
 
-restartBtn.addEventListener('click', (evt) => {
+playAgainBtn.addEventListener('click', (evt) => {
   newRound();
 })
 
