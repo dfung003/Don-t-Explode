@@ -48,6 +48,9 @@ let roundCount = 1;
 // Something here to make it so the bomb count would not show up
 // if count is at 8 or less
 
+// Need to figure out formatting of the Rules guidelines, the
+// player/CPU score count, bomb count, and the text log
+
 /* 
 class Player
 
