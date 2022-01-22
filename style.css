@@ -9,11 +9,21 @@
 }
 
 .container {
+    /* display: flex; */
     border: 2px solid black;
     width: 40%;
     height: 80vh;
+    justify-content: space-between;
 }
 
-.gameplay {
-    
+#player-section {
+    width: 20%;
+}
+
+#gameplay {
+    width: 60%;
+}
+
+#log-section {
+    width: 20%
 }
