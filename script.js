@@ -31,6 +31,7 @@ NOTES: use a modal for when the count is 8 or less
 
 // https://fonts.google.com/specimen/Press+Start+2P#standard-styles
 // https://fonts.google.com/specimen/Bebas+Neue
+// https://fonts.google.com/specimen/Orbitron
 // POSSIBLE FONTS
 
 // GLOBAL VARIABLE OF ROUND COUNT
