@@ -110,8 +110,14 @@ const cpu = new Computer();
 
 class Bomb {
   constructor () {
-    this.count = 15; // first round by default will be count of 15
-    this.explode = false;
+    this.setCount(15)
+  }
+    setCount (newCount) {
+      this.count = newCount; // first round by default will be count of 15
+      const bombCountUI = document.getElementById("bomb-count");
+      bombCountUI.innerText = newCount;
+  
+    // this.explode = false;
   }
 }
 
@@ -122,7 +128,8 @@ const bomb = new Bomb;
 // FUNCTION THAT DETERMINES BOMB HEALTH AT START OF THE ROUND
 const bombCount = () => {
   if (roundCount > 1) {
-    bomb.count = Math.floor(Math.random() * (21 - 15)) + 15
+    // bomb.count = Math.floor(Math.random() * (21 - 15)) + 15;
+    bomb.setCount(Math.floor(Math.random() * (21 - 15)) + 15);
     // this makes 15-20
   }
 }
@@ -135,14 +142,16 @@ console.log(bomb.count)
 const playerToss = (count) => {
   player.hasBomb = true; // player would have bomb to toss it
   cpu.hasBomb = false; // 
-  bomb.count -= count; // counter on the bomb would decrease by 1
-  console.log(bomb.count, "Player move")
+  bomb.setCount(bomb.count - count); // counter on the bomb would decrease by 1
+  // console.log(bomb.count, "Player move")
+  logEvent(`You have decreased the bomb count by ${count}. Bomb count is now at ${bomb.count}`)
   // Put in the DOM "Player has decreased the count by 1(2)"
   if (bomb.count <= 0) { // if bomb counter is already at 0 or less, end the game
-    bomb.explode = true;
     endGame() 
   } else {
-    cpuToss()
+    toggleButtons();
+    logEvent(`CPU is deciding...`)
+    setTimeout(cpuToss, 2000);
   }
   
 }
@@ -154,14 +163,15 @@ const cpuToss = () => {
   cpu.hasBomb = true;
   player.hasBomb = false;
   const cpuDecide = Math.floor(Math.random()*2+1); // variable for cpu to generate 1 or 2
-  bomb.count -= cpuDecide; // cpu decrease by 1 or 2
+  bomb.setCount(bomb.count - cpuDecide); // cpu decrease by 1 or 2
   // Print in the DOM "CPU is deciding... (2 seconds)"
   // Print in the DOM "CPU has decreased the count by 1(2)"
   if (bomb.count <= 0) { // if bomb counter is already at 0 or less, end the game
-    bomb.explode = true;
     endGame() 
   } 
   console.log(bomb.count, "CPU move")
+  logEvent(`CPU has decreased the bomb count by ${cpuDecide}. Bomb count is now at ${bomb.count}`)
+  toggleButtons();
 }
 
 // // FUNCTION THAT DECREASES BOMB BY 2
@@ -170,7 +180,6 @@ const cpuToss = () => {
 //   cpu.hasBomb = true;
 //   bomb.count -= 2;
 //     if (bomb.count <= 0) {
-//       bomb.explode = true;
 //       endGame()
 //     }
 // }
@@ -183,26 +192,30 @@ const newRound = () => { // make the image of player hold the bomb, computer ima
   cpu.hasBomb = false;
   player.hasBomb = true;
   bombCount();
+  const eventLog = document.getElementById("running-log");
+  eventLog.value = "";
   // display bomb.count in the DOM
   // re-enable button here
 }
 
 // FUNCTION THAT CHECKS TO SEE IF BOMB EXPLODES
 const endGame = () => { // ends the game if either bomb explodes on player or on cpu
-  if(bomb.explode) {
     if(player.hasBomb) {
       cpu.victory += 1 // adds 1 to win counter
+      const cpuScoreUI = document.getElementById("cpu-score");
+      cpuScoreUI.innerText = cpu.victory;
       window.alert(`CPU won. CPU victories: ${cpu.victory}`)
       // Print in the DOM "Bomb has exploded in your hands. You lose."
       // add 1 to CPU score on the DOM
     } else if (cpu.hasBomb) {
       player.victory += 1
+      const playerScoreUI = document.getElementById("player-score");
+      playerScoreUI.innerText = player.victory;
       window.alert(`You won! Your victories: ${player.victory}`)
       // Print in the DOM "You win" and add 1 to player score on the DOM
     }
-  }
-  decreaseOneBtn.disabled = true;
-  decreaseTwoBtn.disabled = true;
+  toggleButtons();
+  
 }
 
 
@@ -239,6 +252,20 @@ gameStart()
   restart button that refreshes the game
 
 */
+// FUNCTION ADDS TEXT IN LOG
+
+const logEvent = (evt) => {
+  const textLog = document.getElementById("running-log");
+  textLog.value += '\n' + evt;
+  
+}
+
+// FUNCTION TO TOGGLE PLAYER BUTTONS
+
+const toggleButtons = () => {
+  decreaseOneBtn.disabled = !decreaseOneBtn.disabled;
+  decreaseTwoBtn.disabled = !decreaseTwoBtn.disabled;
+}
 
 const decreaseOneBtn = document.getElementById("decrease-one")
 
@@ -256,8 +283,7 @@ const playAgainBtn = document.getElementById("play")
 
 playAgainBtn.addEventListener('click', (evt) => {
   newRound();
-  decreaseOneBtn.disabled = false;
-  decreaseTwoBtn.disabled = false;
+  toggleButtons();
 })
 
 // audio track "Bombing Mission FFVII" running in the background
