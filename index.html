@@ -19,15 +19,24 @@
                 <h2 id="rules">How to Play</h2>
                 <button value=1 id="decrease-one">-1</button>
                 <button value=2 id="decrease-two">-2</button>
-                <button id="play">Play Again</button>
+                
             </div>
         </div>
         <div id="gameplay" class="container">
-            <h2 id="player-score">Player Score</h2>
-            <h2 id="bomb-count">Bomb Count</h2>
-            <h2 id="cpu-score">CPU Score</h2>
+            <div id="counters">
+                <h2>Player Score</h2>
+                <h2>Bomb Count</h2>
+                <h2>CPU Score</h2>
+            </div>
+            <div id="number-counters">
+                <h2 id="player-score" class="dynamic-count">0</h2>
+                <h2 id="bomb-count" class="dynamic-count">0</h2>
+                <h2 id="cpu-score" class="dynamic-count">0</h2>
+            </div>
             <img id="playerhasbomb" src="./assets/playerhasbomb.png"/>
-            
+            <div>
+            <button id="play">Play Again</button>
+            </div>
         </div>
         <div id="log-section" class="container">
             
