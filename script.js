@@ -9,7 +9,7 @@
 5. Whoever counts down to 0 or less first with the bomb, loses.
 
 
-NOTES: use a modal for when the count is 8 or less
+NOTES: use a modal for when the count is 3-8
 */
 
 /* SEQUENCE OF HOW THE GAME WEBSITE IN THE BROWSER WILL WORK 
@@ -201,7 +201,8 @@ const endGame = () => { // ends the game if either bomb explodes on player or on
       // Print in the DOM "You win" and add 1 to player score on the DOM
     }
   }
-  newRound() // make Play Again button clickable
+  decreaseOneBtn.disabled = true;
+  decreaseTwoBtn.disabled = true;
 }
 
 
@@ -255,6 +256,8 @@ const playAgainBtn = document.getElementById("play")
 
 playAgainBtn.addEventListener('click', (evt) => {
   newRound();
+  decreaseOneBtn.disabled = false;
+  decreaseTwoBtn.disabled = false;
 })
 
 // audio track "Bombing Mission FFVII" running in the background

@@ -15,14 +15,18 @@
     
     <div id="main">
         <div id="player-section" class="container">
-            <div id="player-container">
+            <div id="rules-container">
                 <h2 id="rules">How to Play</h2>
+            </div>
+            <div id="player-container">
+            
                 <button value=1 id="decrease-one">-1</button>
                 <button value=2 id="decrease-two">-2</button>
                 
             </div>
         </div>
         <div id="gameplay" class="container">
+            <div id="counters-and-numbers">
             <div id="counters">
                 <h2>Player Score</h2>
                 <h2>Bomb Count</h2>
@@ -33,12 +37,13 @@
                 <h2 id="bomb-count" class="dynamic-count">0</h2>
                 <h2 id="cpu-score" class="dynamic-count">0</h2>
             </div>
-            <img id="playerhasbomb" src="./assets/playerhasbomb.png"/>
+        </div>
+            <img id="playerhasbomb" class="images" src="./assets/playerhasbomb.png"/>
             <div>
-            <button id="play">Play Again</button>
+                <button id="play">Play Again</button>
             </div>
         </div>
-        <div id="log-section" class="container">
+        <div id="log-section" class="container" style="overflow-y:scroll">
             
         </div>
     </div>
