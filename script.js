@@ -112,7 +112,7 @@ class Bomb {
   constructor () {
     this.setCount(15)
   }
-    setCount (newCount) {
+    setCount (newCount) { // create function to set the count
       this.count = newCount; // first round by default will be count of 15
       const bombCountUI = document.getElementById("bomb-count");
       bombCountUI.innerText = newCount;
@@ -140,18 +140,25 @@ console.log(bomb.count)
 
 // FUNCTION THAT DECREASES BOMB BY 1 OR 2
 const playerToss = (count) => {
+  
   player.hasBomb = true; // player would have bomb to toss it
   cpu.hasBomb = false; // 
-  bomb.setCount(bomb.count - count); // counter on the bomb would decrease by 1
+  const playerCount = (count > bomb.count) ? 0 : bomb.count - count
+  bomb.setCount(playerCount); // counter on the bomb would decrease by 1
   // console.log(bomb.count, "Player move")
   logEvent(`You have decreased the bomb count by ${count}. Bomb count is now at ${bomb.count}`)
   // Put in the DOM "Player has decreased the count by 1(2)"
   if (bomb.count <= 0) { // if bomb counter is already at 0 or less, end the game
     endGame() 
   } else {
+    changeImage("./assets/throwbomb.png")
     toggleButtons();
-    logEvent(`CPU is deciding...`)
-    setTimeout(cpuToss, 2000);
+    setTimeout(() => {
+      changeImage("./assets/cpuhasbomb.png")
+      logEvent(`CPU is deciding...`)
+      setTimeout(cpuToss, Math.floor(Math.random()*2+1) * 1000);  
+    }, 500);
+   
   }
   
 }
@@ -163,16 +170,24 @@ const cpuToss = () => {
   cpu.hasBomb = true;
   player.hasBomb = false;
   const cpuDecide = Math.floor(Math.random()*2+1); // variable for cpu to generate 1 or 2
-  bomb.setCount(bomb.count - cpuDecide); // cpu decrease by 1 or 2
+  const cpuCount = (cpuDecide > bomb.count) ? 0 : bomb.count - cpuDecide 
+  bomb.setCount(cpuCount); // cpu decrease by 1 or 2
   // Print in the DOM "CPU is deciding... (2 seconds)"
   // Print in the DOM "CPU has decreased the count by 1(2)"
+ 
   if (bomb.count <= 0) { // if bomb counter is already at 0 or less, end the game
-    endGame() 
+    endGame();
+    toggleButtons();
+    return 
   } 
   console.log(bomb.count, "CPU move")
   logEvent(`CPU has decreased the bomb count by ${cpuDecide}. Bomb count is now at ${bomb.count}`)
-  toggleButtons();
-}
+  toggleButtons(); // player's turn
+  changeImage("./assets/throwbomb.png")
+  setTimeout(() => {
+    changeImage("./assets/playerhasbomb.png")}, 500)
+
+  }
 
 // // FUNCTION THAT DECREASES BOMB BY 2
 // const playerTossTwo = () => {
@@ -192,6 +207,7 @@ const newRound = () => { // make the image of player hold the bomb, computer ima
   cpu.hasBomb = false;
   player.hasBomb = true;
   bombCount();
+  changeImage("./assets/playerhasbomb.png")
   const eventLog = document.getElementById("running-log");
   eventLog.value = "";
   // display bomb.count in the DOM
@@ -200,6 +216,7 @@ const newRound = () => { // make the image of player hold the bomb, computer ima
 
 // FUNCTION THAT CHECKS TO SEE IF BOMB EXPLODES
 const endGame = () => { // ends the game if either bomb explodes on player or on cpu
+  changeImage("./assets/bombexplosion.png")
     if(player.hasBomb) {
       cpu.victory += 1 // adds 1 to win counter
       const cpuScoreUI = document.getElementById("cpu-score");
@@ -218,6 +235,11 @@ const endGame = () => { // ends the game if either bomb explodes on player or on
   
 }
 
+// FUNCTION THAT CHANGES THE IMAGE ON THE DOM
+const changeImage = (imagePath) => {
+    const picture = document.getElementById("picture")
+    picture.src = imagePath
+}
 
 
 
