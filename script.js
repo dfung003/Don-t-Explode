@@ -5,9 +5,8 @@
 1. Players take turns in tossing a bomb back and forth that starts on a count of 15
 2. You will always go first, while the CPU goes second
 3. Both players have the option of decreasing the counter by 1 or 2
-4. When the bomb count is 3-8, have the bomb count randomly disappear or appear
-5. Whoever counts down to 0 or less first with the bomb, loses.
-
+4. Whoever counts down to 0 or less first with the bomb, loses.
+5. On rounds after the first, bomb count will vary from 15-20.
 
 NOTES: use a modal for when the count is 3-8
 */
