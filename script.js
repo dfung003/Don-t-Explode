@@ -53,23 +53,6 @@ closeButton.addEventListener('click', (evt) => {
 // GLOBAL VARIABLE REFERENCING STATUS MESSAGE ON VICTORY
 const pTags = document.getElementById("status-message");
 
-// GLOBAL VARIABLE TO SEE IF BOMB COUNT HITS THRESHOLD
-let bombRange = false;
-
-const checkBomb = () => {
-  if (bomb.count <= 6) {
-    bombRange = true;
-    // index = Math.floor(Math.random() * 2) + 1
-    // console.log("index is", index)
-    // if (index === 1) {
-    //   bombRange = true;
-    // } else {
-    //   bombRange = false;
-    // }
-  } else {
-    bombRange = false;
-  }
-}
 
 // GLOBAL VARIABLE OF ROUND COUNT
 let roundCount = 1;
@@ -151,17 +134,13 @@ class Bomb {
   }
     setCount (newCount) { // create function to set the count
       this.count = newCount; // first round by default will be count of 15
-      
-      // if bomb threshold is true, bombCountUI.innerText = ?
-      if (!bombRange) {
-        bombCountUI.innerText = newCount; 
-      } else {
-        bombCountUI.innerText = "???"
-      }
+      const bombCountUI = document.getElementById("bomb-count");
+      bombCountUI.innerText = newCount;
   
     // this.explode = false;
   }
 }
+
 
 // Instantiation of Bomb
 
@@ -182,21 +161,15 @@ console.log(bomb.count)
 
 // FUNCTION THAT DECREASES BOMB BY 1 OR 2
 const playerToss = (count) => {
-  checkBomb()
+  
   player.hasBomb = true; // player would have bomb to toss it
   cpu.hasBomb = false; // 
   const playerCount = (count > bomb.count) ? 0 : bomb.count - count
   bomb.setCount(playerCount); // counter on the bomb would decrease by 1
-  checkBomb()
   // console.log(bomb.count, "Player move")
-  if (!bombRange) {
-    logEvent(`You have decreased the bomb count by ${count}. Bomb count is now at ${bomb.count}`)
-  } else {
-    logEvent(`You have decreased the bomb count by ${count}. Bomb count is now at ???`)
-  }
+  logEvent(`You have decreased the bomb count by ${count}. Bomb count is now at ${bomb.count}`)
   // Put in the DOM "Player has decreased the count by 1(2)"
   if (bomb.count <= 0) { // if bomb counter is already at 0 or less, end the game
-    logEvent(``)
     endGame() 
   } else {
     changeImage("./assets/throwbomb.png")
@@ -215,7 +188,6 @@ const playerToss = (count) => {
 // and swap images of players holding the bomb
 
 const cpuToss = () => {
-  checkBomb()
   cpu.hasBomb = true;
   player.hasBomb = false;
   const cpuDecide = Math.floor(Math.random()*2+1); // variable for cpu to generate 1 or 2
@@ -223,27 +195,22 @@ const cpuToss = () => {
   bomb.setCount(cpuCount); // cpu decrease by 1 or 2
   // Print in the DOM "CPU is deciding... (2 seconds)"
   // Print in the DOM "CPU has decreased the count by 1(2)"
-  checkBomb()
-  // console.log(bomb.count, "Player move")
-  if (!bombRange) {
-    logEvent(`CPU has decreased the bomb count by ${cpuDecide}. Bomb count is now at ${bomb.count}`)
-  } else {
-    logEvent(`CPU has decreased the bomb count by ???. Bomb count is now at ???`)
-  }
-
+ 
   if (bomb.count <= 0) { // if bomb counter is already at 0 or less, end the game
     endGame();
+    logEvent(`The bomb has exploded!`)
     toggleButtons();
     return 
   } 
   console.log(bomb.count, "CPU move")
-  
+  logEvent(`CPU has decreased the bomb count by ${cpuDecide}. Bomb count is now at ${bomb.count}`)
   toggleButtons(); // player's turn
   changeImage("./assets/throwbomb.png")
   setTimeout(() => {
     changeImage("./assets/playerhasbomb.png")}, 500)
 
   }
+
 
 // // FUNCTION THAT DECREASES BOMB BY 2
 // const playerTossTwo = () => {
@@ -290,7 +257,7 @@ const endGame = () => { // ends the game if either bomb explodes on player or on
       player.victory += 1
       const playerScoreUI = document.getElementById("player-score");
       playerScoreUI.innerText = player.victory;
-      pTags.textContent = `You won!`
+      pTags.textContent = `You win!`
       modalStatus.classList.remove("hidden");
       // Print in the DOM "You win" and add 1 to player score on the DOM
     }
