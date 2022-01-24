@@ -105,12 +105,18 @@
 #modal {
     position: absolute;
     z-index: 5;
-    width: 500px;
+    width: 600px;
     height: 150px;
     background-color: blue;
-    left: 29%;
+    left: 25%;
+    top: 18%;
 }
 
 #status-message {
     color: white;
+    text-align: center;
+}
+
+#play-again {
+    text-align: center;
 }

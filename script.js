@@ -196,6 +196,7 @@ const playerToss = (count) => {
   }
   // Put in the DOM "Player has decreased the count by 1(2)"
   if (bomb.count <= 0) { // if bomb counter is already at 0 or less, end the game
+    logEvent(``)
     endGame() 
   } else {
     changeImage("./assets/throwbomb.png")
@@ -366,3 +367,19 @@ decreaseTwoBtn.addEventListener('click', (evt) => {
 
 
 // audio track "Bombing Mission FFVII" running in the background
+
+let audioElement = document.getElementById("bgm");
+const togglePlay = () => {
+    if (audioElement.paused) {
+        audioElement.play();
+    }
+    else {
+        audioElement.pause();
+    }
+};
+
+const playMusic = document.getElementById("music");
+
+playMusic.addEventListener('click', (evt) => {
+    togglePlay();
+})
