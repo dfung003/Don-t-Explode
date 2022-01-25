@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@500&display=swap');
 
+#whole-body {
+    background-color: rgba(46, 42, 42, 0.85);
+}
+
 body {
-    color: rgb(0, 0, 0);
+    color: white;
     font-family: 'Orbitron', sans-serif;
-    background-color: rgb(170, 153, 153);
-    /* background-image: url(/assets/nintendo_background.jpg); */
+    background-image: url(/assets/nintendo_background.jpg);
 }
 
 #title {
@@ -34,8 +37,7 @@ body {
     width: 25%;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    
+    /* flex-wrap: wrap; */
 }
 
 #player-container {
@@ -45,13 +47,19 @@ body {
     width: 50%;
     gap: 25px;
     padding-top: 15%;
-    
+   
 }
 
 #player-container > button {
-    height: 50%;
+    margin-top: 20%;
+    margin-bottom: 0%;
+    height: 30%;
     font-family: 'Orbitron', sans-serif;
-    background-color: rgb(160, 61, 61);
+    background-color: rgba(173, 91, 91, 0.55);
+    color: white;
+    font-size: 18px;
+    /* justify-content: space-evenly; */
+
 }
 
 #rules-container {
@@ -73,11 +81,23 @@ body {
     align-items: center;
 }
 
+#counters {
+    display: flex;
+    justify-content: space-evenly;
+    height: 20%;
+    text-align: center;
+    border: 2px solid red;
+}
+
 #counters-and-numbers {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.dynamic-count {
+    margin-top: 0px;
 }
 
 #bomb-count {
@@ -87,6 +107,7 @@ body {
 .images {
     max-width: 100%;
     max-height: 100%;
+    border: 2px solid blue;
 }
 /* #playerhasbomb {
     max-width: 100%;
@@ -97,17 +118,11 @@ body {
     width: 25%
 }
 
-#counters {
-    display: flex;
-    justify-content: space-evenly;
-    height: 20%;
-    text-align: center;
-    border: 2px solid red;
-}
+
 
 #counters > h2, #number-counters > h2 {
     width: 33%;
-    border: 2px solid rgb(0, 255, 64);
+    border: 2px solid rgb(187,182,162);
 }
 
 #number-counters > h2 {
@@ -128,7 +143,9 @@ body {
 #running-log {
     font-family: 'Bebas Neue', cursive;
     font-size: 18px;
-    background-color: rgb(131, 129, 129);
+    background-color: rgb(131, 129, 129, 0.20);
+    color: white;
+    position: absolute;
 }
 
 /* textarea {
@@ -145,16 +162,26 @@ body {
     z-index: 5;
     width: 600px;
     height: 200px;
-    background-color: rgb(197, 206, 161);
+    background-color: rgb(70, 66, 66);
     left: 25%;
     top: 18%;
 }
 
 #status-message {
-    color: rgb(77, 64, 64);
+    color: rgb(255, 255, 255);
     text-align: center;
+    padding: 5%;
+    font-size: 20px;
 }
 
 #play-again {
     text-align: center;
+}
+
+#play-again > button {
+    height: 50%;
+    font-family: 'Orbitron', sans-serif;
+    background-color: rgba(173, 91, 91, 0.55);
+    color: white;
+    font-size: 18px;
 }
