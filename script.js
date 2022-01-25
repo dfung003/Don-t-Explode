@@ -8,27 +8,23 @@
 4. Whoever counts down to 0 or less first with the bomb, loses.
 5. On rounds after the first, bomb count will vary from 15-20.
 
-NOTES: use a modal for when the count is 3-8
 */
 
 /* SEQUENCE OF HOW THE GAME WEBSITE IN THE BROWSER WILL WORK 
 // Once you are on the game page, it will have a title of Don't Explode
-// It will have a Start Game button outside of the in-game textbox and centered
+// It will have a Start Game button
 // Once user presses Start Game, it will display the count of 15 with a picture of
 // a bomb. There will be two clickable buttons for the user.
 // The first button will allow the user to decrease the bomb count by 1 and the other
 // button will allow the user to decrease the bomb count by 2
 // Bomb count displayed will be updated based on the decision of player and computer
-// There will be some sort of status indicator on the website that indicates that
-// it is your turn. Bomb count will be hidden once bomb count gets to 8 or less
-// so that it'd be more difficult and would be more of a "mind game" with the other 
-// player. Once the bomb count reaches 0, display whether you or the computer won
-// and display a Restart Game button to allow the player to play again
+// There will be a log on the website that indicates that
+// it is your turn. Once the bomb count reaches 0, display whether you or the computer won
+// and display a Play Again button to allow the player to play again
 // Restart Game refreshes the count, win counter displayed, after first round is over
 // the bomb counter will randomize from an integer of 15 to 20 instead of just 15
 */
 
-// https://fonts.google.com/specimen/Press+Start+2P#standard-styles
 // https://fonts.google.com/specimen/Bebas+Neue
 // https://fonts.google.com/specimen/Orbitron
 // POSSIBLE FONTS
@@ -170,6 +166,7 @@ const playerToss = (count) => {
   // Put in the DOM "Player has decreased the count by 1(2)"
   if (bomb.count <= 0) { // if bomb counter is already at 0 or less, end the game
     endGame() 
+    logEvent(`The bomb has exploded!`);
   } else {
     changeImage("./assets/throwbomb.png")
     toggleButtons();
@@ -203,6 +200,7 @@ const cpuToss = () => {
   } 
   console.log(bomb.count, "CPU move")
   logEvent(`CPU has decreased the bomb count by ${cpuDecide}. Bomb count is now at ${bomb.count}`)
+  logEvent(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`)
   toggleButtons(); // player's turn
   changeImage("./assets/throwbomb.png")
   setTimeout(() => {
@@ -248,7 +246,7 @@ const endGame = () => { // ends the game if either bomb explodes on player or on
       const cpuScoreUI = document.getElementById("cpu-score");
       cpuScoreUI.innerText = cpu.victory;
       
-      pTags.textContent = `Bomb exploded on your hands. CPU won.`
+      pTags.textContent = `The bomb exploded on your hands. CPU wins.`
       modalStatus.classList.remove("hidden");
       // Print in the DOM "Bomb has exploded in your hands. You lose."
       // add 1 to CPU score on the DOM
