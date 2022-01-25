@@ -4,7 +4,7 @@
 body {
     color: rgb(0, 0, 0);
     font-family: 'Orbitron', sans-serif;
-    background-color: rgb(131, 129, 129);
+    background-color: rgb(170, 153, 153);
     /* background-image: url(/assets/nintendo_background.jpg); */
 }
 
@@ -107,7 +107,7 @@ body {
 
 #counters > h2, #number-counters > h2 {
     width: 33%;
-    border: 2px solid blue;
+    border: 2px solid rgb(0, 255, 64);
 }
 
 #number-counters > h2 {
@@ -145,13 +145,13 @@ body {
     z-index: 5;
     width: 600px;
     height: 200px;
-    background-color: blue;
+    background-color: rgb(197, 206, 161);
     left: 25%;
     top: 18%;
 }
 
 #status-message {
-    color: white;
+    color: rgb(77, 64, 64);
     text-align: center;
 }
 
