@@ -28,6 +28,9 @@
 // https://fonts.google.com/specimen/Bebas+Neue
 // https://fonts.google.com/specimen/Orbitron
 
+// WIREFRAME FOR THE DOM
+// https://wireframe.cc/96MKRd
+
 
 // GLOBAL VARIABLE FOR BOMB COUNT TO SHOW IN THE DOM
 
