@@ -12,31 +12,31 @@
 
 /* SEQUENCE OF HOW THE GAME WEBSITE IN THE BROWSER WILL WORK 
 // Once you are on the game page, it will have a title of Don't Explode
-// It will have a Start Game button
-// Once user presses Start Game, it will display the count of 15 with a picture of
-// a bomb. There will be two clickable buttons for the user.
+// Once you enter the webpage, you will see a bomb count of 15, player/cpu scores 
+// There will be two clickable buttons for the user.
 // The first button will allow the user to decrease the bomb count by 1 and the other
 // button will allow the user to decrease the bomb count by 2
 // Bomb count displayed will be updated based on the decision of player and computer
 // There will be a log on the website that indicates that
 // it is your turn. Once the bomb count reaches 0, display whether you or the computer won
 // and display a Play Again button to allow the player to play again
-// Restart Game refreshes the count, win counter displayed, after first round is over
-// the bomb counter will randomize from an integer of 15 to 20 instead of just 15
+// Play Again refreshes the count, win counter is updated
+// The bomb counter will randomize from an integer of 15 to 20 instead of always 15.
 */
 
+// Fonts used
 // https://fonts.google.com/specimen/Bebas+Neue
 // https://fonts.google.com/specimen/Orbitron
-// POSSIBLE FONTS
+
 
 // GLOBAL VARIABLE FOR BOMB COUNT TO SHOW IN THE DOM
 
 const bombCountUI = document.getElementById("bomb-count");
 
-// GLOBAL VARIABLE FOR MODAL
+// GLOBAL VARIABLE FOR MODAL STATING THE OUTCOME OF THE ROUND
 let modalStatus = document.getElementById("modal");
 
-// GLOBAL VARIABLE TO CLOSE MODAL
+// GLOBAL VARIABLE TO CLOSE MODAL AND TO PLAY AGAIN
 let closeButton = document.getElementById("close");
 
 closeButton.addEventListener('click', (evt) => {
@@ -78,14 +78,13 @@ method that allows the player to decrease the counter of the bomb by
 
 class Player {
     constructor() {
-        this.hasBomb = true;
-        this.victory = 0;
+        this.hasBomb = true; // determines if you have possession of the bomb
+        this.victory = 0; // keeps count of how many times you won
     }
     // Player decrease bomb counter method
 
     // decreaseCount() { move to a function
 
-    // }
 }
 
 // Instantiating Player
@@ -106,8 +105,8 @@ randomly by either 1 or 2
 
 class Computer {
     constructor() {
-        this.hasBomb = false; // Math.floor(Math.random()*2+1)
-        this.victory = 0;
+        this.hasBomb = false; // determines whether cpu has possession of the bomb
+        this.victory = 0; // cpu score counter
     }
     // Computer randomly decreases bomb counter method
 
