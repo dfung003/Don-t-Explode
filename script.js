@@ -124,13 +124,12 @@ const cpu = new Computer();
 
 class Bomb {
   constructor () {
-    this.setCount(15)
+    this.setCount(15) // property to set the bomb count by 15 on default
   }
     setCount (newCount) { // create function to set the count
-      this.count = newCount; // first round by default will be count of 15
-      const bombCountUI = document.getElementById("bomb-count");
-      bombCountUI.innerText = newCount;
-  
+      this.count = newCount; // first round by default will be count of 15, then will randomize
+      const bombCountUI = document.getElementById("bomb-count"); // stored in variable of bomb count in UI
+      bombCountUI.innerText = newCount; // bomb count will show in the DOM by newCount parameter
     // this.explode = false;
   }
 }
@@ -159,7 +158,7 @@ const playerToss = (count) => {
   player.hasBomb = true; // player would have bomb to toss it
   cpu.hasBomb = false; // 
   const playerCount = (count > bomb.count) ? 0 : bomb.count - count
-  bomb.setCount(playerCount); // counter on the bomb would decrease by 1
+  bomb.setCount(playerCount); // counter on the bomb will show 0 even if it is at -1
   // console.log(bomb.count, "Player move")
   logEvent(`You have decreased the bomb count by ${count}. Bomb count is now at ${bomb.count}`)
   // Put in the DOM "Player has decreased the count by 1(2)"
@@ -186,7 +185,7 @@ const cpuToss = () => {
   cpu.hasBomb = true;
   player.hasBomb = false;
   const cpuDecide = Math.floor(Math.random()*2+1); // variable for cpu to generate 1 or 2
-  const cpuCount = (cpuDecide > bomb.count) ? 0 : bomb.count - cpuDecide 
+  const cpuCount = (cpuDecide > bomb.count) ? 0 : bomb.count - cpuDecide // count will show as 0 regardless
   bomb.setCount(cpuCount); // cpu decrease by 1 or 2
   // Print in the DOM "CPU is deciding... (2 seconds)"
   // Print in the DOM "CPU has decreased the count by 1(2)"
@@ -318,7 +317,7 @@ const toggleButtons = () => {
 const decreaseOneBtn = document.getElementById("decrease-one")
 
 decreaseOneBtn.addEventListener('click', (evt) => {
-  playerToss(evt.target.value) //passing the value of the tag 
+  playerToss(evt.target.value) // passing the value of the tag 
 })
 
 const decreaseTwoBtn = document.getElementById("decrease-two")
