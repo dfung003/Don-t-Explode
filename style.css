@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@500&display=swap');
 
+@media only screen and (max-width: 1000px) {
+    li {
+        font-size: 12px;
+    }
+}
+
+
 #whole-body {
     background-color: rgba(46, 42, 42, 0.85);
 }
@@ -66,7 +73,7 @@ body {
 #rules-container {
     height: 55%;
     width: 100%;
-    
+    padding-left: 8px;
 }
 
 #rules {
@@ -92,7 +99,7 @@ body {
 #counters {
     display: flex;
     justify-content: space-evenly;
-    height: 15%;
+    height: 8vh;
     text-align: center;
     /* border: 2px solid red; */
 }
