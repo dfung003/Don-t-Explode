@@ -307,7 +307,7 @@ gameStart()
 const logEvent = (evt) => {
   const textLog = document.getElementById("running-log");
   textLog.value += '\n' + evt;
-  
+  textLog.scrollTop = textLog.scrollHeight;
 }
 
 // FUNCTION TO TOGGLE PLAYER BUTTONS

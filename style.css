@@ -70,7 +70,7 @@ body {
 }
 
 #rules {
-    font-size: 25px;
+    font-size: 22px;
 }
 
 
@@ -112,7 +112,7 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    max-width: 80%;
+    max-width: 77%;
     border: 1px solid rgb(52, 52, 218);
     width: 100%;
     height: 60%;
@@ -174,7 +174,7 @@ body {
     width: 600px;
     height: 200px;
     background-color: rgb(70, 66, 66);
-    left: 29%;
+    left: 30%;
     top: 18%;
 }
 

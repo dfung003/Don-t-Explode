@@ -35,6 +35,8 @@ provided so much fun to me as a child, I decided to recreate a game similar to i
 
 ## Resources
 * MDN Web Docs: [Set timeout method](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout), [Textarea element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea)
+* [Textarea element scroll to bottom by default](https://stackoverflow.com/questions/7373081/how-to-have-a-textarea-to-keep-scrolled-to-the-bottom-when-updated)
+* [Reusable JS modal template](https://codepen.io/eddyerburgh/pen/YqvVrr)
 * [Flexbox guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-properties)
 * [Guide to writing a README](https://meakaakka.medium.com/a-beginners-guide-to-writing-a-kickass-readme-7ac01da88ab3)
 * [README Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
