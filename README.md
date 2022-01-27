@@ -18,7 +18,9 @@ provided so much fun to me as a child, I decided to recreate a game similar to i
 
 
 ## How to play the game
+![Alt text](./assets/Screenshot_dont_explode.png?raw=true "Title")
 * You have the option of selecting two buttons: Decrease count by 1, Decrease count by 2
+![Alt text](./assets/Screenshot_buttons.png?raw=true "Title")
 * There is a bomb count highlighted in red that displays the total count before it explodes
 * You, the player starts first in every round. Pressing Decrease count by 1 will decrease the bomb count by 1 while pressing Decrease count by 2 will decrease the bomb count by 2
 * After you finish your turn, the bomb will be handed to the CPU and it will make its own choice of whether to decrease the bomb count by 1 or 2
