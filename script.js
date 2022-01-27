@@ -225,7 +225,7 @@ const newRound = () => { // make the image of player hold the bomb, computer ima
   // not hold the bomb, resets the game
   roundCount++
   bombCount();
-  bombRange = false;
+  // bombRange = false;
   bombCountUI.innerText = bomb.count;
   console.log("The bomb health is " + bomb.count)
   // Print in the DOM `Round ${roundCount} start!`
@@ -236,7 +236,7 @@ const newRound = () => { // make the image of player hold the bomb, computer ima
   const eventLog = document.getElementById("running-log");
   eventLog.value = "";
   // display bomb.count in the DOM
-  // re-enable button here
+  
 }
 
 // FUNCTION THAT CHECKS TO SEE IF BOMB EXPLODES
