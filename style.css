@@ -15,7 +15,7 @@
 body {
     color: white;
     font-family: 'Orbitron', sans-serif;
-    background-image: url(./assets/nintendo_background.jpg);
+    background-image: url(assets/nintendo_background.jpg);
 }
 
 #title {
