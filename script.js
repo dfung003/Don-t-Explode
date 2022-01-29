@@ -263,9 +263,9 @@ const endGame = () => { // ends the game if either bomb explodes on player or on
   
 }
 
+const picture = document.getElementById("picture")
 // FUNCTION THAT CHANGES THE IMAGE ON THE DOM
 const changeImage = (imagePath) => {
-    const picture = document.getElementById("picture")
     picture.src = imagePath
 }
 
@@ -329,6 +329,31 @@ decreaseTwoBtn.addEventListener('click', (evt) => {
   playerToss(evt.target.value)
 })
 
+// HOVER EFFECT TO CHANGE BUTTONS TO RED FOR BOTH BUTTONS
+
+const playerBtns = document.querySelectorAll(".player-choice")
+
+playerBtns.forEach((item) => {
+  item.addEventListener ('mouseenter', (evt) => {
+    item.classList.add("red")
+    item.classList.remove("brown")
+  })
+  item.addEventListener ('mouseout', (evt) => {
+    item.classList.remove("red") 
+    item.classList.add("brown")
+  })
+})
+
+// EVENT LISTENER FOR START GAME
+
+const startBtn = document.getElementById("start")
+
+startBtn.addEventListener('click', (evt) => {
+  decreaseOneBtn.style.display = "block"
+  decreaseTwoBtn.style.display = "block"
+  picture.style.display = "block"
+  evt.target.style.display = "none"
+})
 
 
 // audio track "Bombing Mission FFVII" running in the background
@@ -337,8 +362,7 @@ let audioElement = document.getElementById("bgm");
 const togglePlay = () => {
     if (audioElement.paused) {
         audioElement.play();
-    }
-    else {
+    } else {
         audioElement.pause();
     }
 };
