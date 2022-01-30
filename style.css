@@ -54,7 +54,7 @@ body {
     flex-direction: column;
     width: 50%;
     gap: 25px;
-    padding-top: 15%;
+    padding-top: 8%;
    
 }
 
@@ -63,7 +63,7 @@ body {
 button {
     /* margin-top: 20%; */
     margin-bottom: 0%;
-    height: 30%;
+    height: 35%;
     font-family: 'Orbitron', sans-serif;
     background-color: rgba(173, 91, 91, 0.55);
     color: white;
@@ -88,7 +88,7 @@ button {
 }
 
 #rules {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 
@@ -131,7 +131,7 @@ button {
     margin-left: auto;
     margin-right: auto;
     max-width: 77%;
-    border: 1px solid rgb(52, 52, 218);
+    border: 1px solid skyblue;
     width: 100%;
     height: 60%;
     background-image: url("./assets/playerhasbomb.png");
